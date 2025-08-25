@@ -2,7 +2,7 @@
   "name": "rnd",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jukangpark.github.io/rnd",
+  "homepage": "https://jukangpark.github.io/CylindricalChart",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
