@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rnd/static/css/main.d23fb394.css",
-    "main.js": "/rnd/static/js/main.a3dcec8b.js",
-    "static/js/453.726dce40.chunk.js": "/rnd/static/js/453.726dce40.chunk.js",
-    "index.html": "/rnd/index.html",
-    "main.d23fb394.css.map": "/rnd/static/css/main.d23fb394.css.map",
-    "main.a3dcec8b.js.map": "/rnd/static/js/main.a3dcec8b.js.map",
-    "453.726dce40.chunk.js.map": "/rnd/static/js/453.726dce40.chunk.js.map"
+    "main.css": "/CylindricalChart/static/css/main.d23fb394.css",
+    "main.js": "/CylindricalChart/static/js/main.677d3755.js",
+    "static/js/453.726dce40.chunk.js": "/CylindricalChart/static/js/453.726dce40.chunk.js",
+    "index.html": "/CylindricalChart/index.html",
+    "main.d23fb394.css.map": "/CylindricalChart/static/css/main.d23fb394.css.map",
+    "main.677d3755.js.map": "/CylindricalChart/static/js/main.677d3755.js.map",
+    "453.726dce40.chunk.js.map": "/CylindricalChart/static/js/453.726dce40.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d23fb394.css",
-    "static/js/main.a3dcec8b.js"
+    "static/js/main.677d3755.js"
   ]
 }
