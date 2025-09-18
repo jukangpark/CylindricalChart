@@ -8,6 +8,8 @@ import CylinderCircles from "./CylinderCircles.jsx";
 import ExitCylinderCircle from "./exit/ExitCylinderCircle.tsx";
 
 const CylinderContent = ({ item, fillWidth, circleCount, thresholdArray }) => {
+  console.log("circleCount", circleCount);
+
   return (
     <CylinderFill
       color={item.color}
