@@ -1,6 +1,6 @@
 import React from "react";
 
-const CylinderSVG = ({ color }: { color: string }) => {
+const CylinderSVG = ({ color = "#797F81" }: { color?: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

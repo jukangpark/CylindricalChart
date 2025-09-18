@@ -1,6 +1,6 @@
 import React from "react";
 
-const DotSVG = ({ color }: { color: string }) => {
+const DotSVG = ({ color = "#87C2ED" }: { color?: string }) => {
   // 고유한 gradient ID 생성 (여러 DotSVG가 동시에 렌더링될 때 충돌 방지)
   const gradientId = `paint0_linear_${Math.random().toString(36).substr(2, 9)}`;
 
