@@ -2,6 +2,7 @@ import React from "react";
 import { CylinderCircle } from "../components/horizontalCylinderChart/horizontalCylindricalStyle.js";
 import CylinderSVG from "./CylinderSVG.tsx";
 import CylinderCircleContainer from "./CylinderCircleContainer.tsx";
+import getCircleColor from "../func/getCircleColor.ts";
 
 const CylinderCircles = ({
   circleCount,
@@ -22,13 +23,11 @@ const CylinderCircles = ({
         console.log("currentValue", currentValue);
 
         // 현재 값에 해당하는 임계치 색상 찾기
-        let circleColor = itemColor; // 기본 색상
-        for (let i = 0; i < thresholdArray.length; i++) {
-          if (currentValue <= thresholdArray[i].value) {
-            circleColor = thresholdArray[i].color;
-            break;
-          }
-        }
+        const circleColor = getCircleColor(
+          currentValue,
+          thresholdArray,
+          itemColor
+        );
 
         console.log("circleColor", circleColor);
 

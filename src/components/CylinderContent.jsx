@@ -20,14 +20,21 @@ const CylinderContent = ({
       fillWidth={fillWidth}
       fillWidthValue={fillWidth}
     >
-      <EntranceCylinderCircle />
-      <CylinderCircles
-        circleCount={circleCount}
-        thresholdArray={thresholdArray}
-        maxValue={maxValue}
-        itemColor={item.color}
-      />
-      {/* 맨 왼쪽 그라데이션 원 - 항상 표시 */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <EntranceCylinderCircle />
+        <CylinderCircles
+          circleCount={circleCount}
+          thresholdArray={thresholdArray}
+          maxValue={maxValue}
+          itemColor={item.color}
+        />
+      </div>
+      {/* 맨 오른쪽 그라데이션 원 - 항상 표시 */}
       <ExitCylinderCircle />
       <ValueDisplay>{item.value}</ValueDisplay>
     </CylinderFill>

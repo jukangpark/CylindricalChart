@@ -31,11 +31,15 @@ const CylinderCircleContainer = ({
 
     const groupChildren = childrenArray.slice(startIndex, endIndex);
 
+    // 각 그룹의 너비 비율 계산
+    const widthRatio = endRatio - startRatio;
+
     if (groupChildren.length > 0) {
       groups.push({
         children: groupChildren,
         label: threshold.label,
         color: threshold.color,
+        widthRatio: widthRatio, // 너비 비율 추가
       });
     }
   }
@@ -63,6 +67,7 @@ const CylinderCircleContainer = ({
               display: "flex",
               alignItems: "center",
               backgroundColor: `${group.color}50`,
+              width: `${group.widthRatio * 100}%`, // 임계치 비율에 따른 너비
             }}
           >
             {group.children}
@@ -82,7 +87,7 @@ const CylinderCircleContainer = ({
           <div
             key={index}
             style={{
-              flex: 1,
+              width: `${group.widthRatio * 100}%`, // 임계치 비율에 따른 너비
               textAlign: "center",
               fontSize: "12px",
               fontWeight: "600",

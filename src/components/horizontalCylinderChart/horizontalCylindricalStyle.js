@@ -119,8 +119,9 @@ export const EntranceGroup = styled.div`
   width: 50px; /* 전체 그룹의 너비 */
   height: 70px;
   opacity: 1;
-  transform: scaleX(0.8);
   z-index: 1;
+  left: -22px; // 원통 중앙에 맞춤 (하단 label 때문에 어쩔 수 없음)
+  top: -8px; // 원통 중앙에 맞춤 (하단 label 때문에 어쩔 수 없음)
 
   svg {
     position: absolute;
