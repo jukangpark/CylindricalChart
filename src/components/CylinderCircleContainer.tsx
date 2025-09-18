@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const CylinderCircleContainer = ({
   children,
@@ -84,17 +85,30 @@ const CylinderCircleContainer = ({
         }}
       >
         {groups.map((group, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, scale: 0.8, x: -50 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              x: 0,
+              scaleY: [1, 1.1, 1], // 세로로 늘어났다 줄어들었다
+            }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2, // 각 그룹마다 0.2초씩 지연
+              ease: "easeOut",
+            }}
             style={{
               display: "flex",
               alignItems: "center",
               backgroundColor: `${group.color}50`,
               width: `${group.widthRatio * 100}%`, // 임계치 비율에 따른 너비
+              maxHeight: "73.6px",
             }}
           >
             {group.children}
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -107,8 +121,15 @@ const CylinderCircleContainer = ({
         }}
       >
         {groups.map((group, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              delay: index * 0.2 + 0.3, // 원들 애니메이션 후에 라벨 애니메이션
+              ease: "easeOut",
+            }}
             style={{
               width: `${group.widthRatio * 100}%`, // 임계치 비율에 따른 너비
               textAlign: "center",
@@ -123,7 +144,14 @@ const CylinderCircleContainer = ({
               position: "relative",
             }}
           >
-            <div
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.3,
+                delay: index * 0.2 + 0.5, // 라벨 텍스트는 더 늦게 나타남
+                ease: "easeOut",
+              }}
               style={{
                 position: "absolute",
                 top: "15px",
@@ -134,8 +162,8 @@ const CylinderCircleContainer = ({
               }}
             >
               {group.label}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))}
       </div>
     </div>

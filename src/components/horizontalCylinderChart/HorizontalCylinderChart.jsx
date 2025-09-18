@@ -28,14 +28,22 @@ const HorizontalCylinderChart = ({ data, thresholdArray }) => {
           <ChartItem key={index}>
             <CylinderContainer>
               <Cylinder>
-                <DotsFlow totalDots={totalDots} position="left" />
+                <DotsFlow
+                  totalDots={totalDots}
+                  position="left"
+                  thresholdArray={thresholdArray}
+                />
                 <CylinderContent
                   item={item}
                   fillWidth={fillWidth}
                   circleCount={circleCount}
                   thresholdArray={thresholdArray}
                 />
-                <DotsFlow totalDots={totalDots} position="right" />
+                <DotsFlow
+                  totalDots={totalDots}
+                  position="right"
+                  thresholdArray={thresholdArray}
+                />
               </Cylinder>
             </CylinderContainer>
             <ChartLabel>{item.label}</ChartLabel>
