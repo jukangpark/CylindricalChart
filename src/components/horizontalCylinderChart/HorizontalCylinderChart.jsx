@@ -10,24 +10,18 @@ import DotsFlow from "../DotsFlow";
 import CylinderContent from "../CylinderContent";
 
 const MAX_DOTS = 50;
-const MAX_CIRCLE_COUNT = 50;
-const MAX_FILL_WIDTH = 90;
 
 const HorizontalCylinderChart = ({ data, maxValue = 1000, thresholdArray }) => {
   return (
     <ChartsContainer>
       {data.map((item, index) => {
-        // 실린더 채워지는 너비 (최대 90%로 제한)
-        const fillWidth = Math.min(
-          (item.value / maxValue) * MAX_FILL_WIDTH,
-          MAX_FILL_WIDTH
-        );
+        // 실린더 채워지는 너비 (10으로 나누어서 계산)
+        const fillWidth = item.value / 10;
 
-        // 가로로 배치된 원의 개수
-        const circleCount = Math.max(
-          Math.floor((item.value / maxValue) * MAX_CIRCLE_COUNT),
-          1
-        );
+        // 가로로 배치된 원의 개수 (10으로 나누어서 계산)
+        const circleCount = Math.max(Math.floor(item.value / 10), 1);
+
+        console.log("가로로 배치된 원의 개수", circleCount);
 
         // 왼쪽에서 오른쪽으로 흐르는 점 개수
         const totalDots = Math.min(item.value, MAX_DOTS);

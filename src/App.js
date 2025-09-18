@@ -34,7 +34,7 @@ function App() {
       label: "test3",
     },
     {
-      value: 10,
+      value: 1000,
       label: "test1",
     },
   ];
@@ -77,7 +77,6 @@ function App() {
           <h2>가로형 실린더 차트</h2>
           <HorizontalCylinderChart
             data={chartData}
-            maxValue={500}
             thresholdArray={thresholdArray}
           />
         </section>

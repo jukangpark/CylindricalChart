@@ -3,16 +3,23 @@ const getCircleColor = (
   thresholdArray: Array<{ value: number; color: string }>,
   defaultColor: string
 ) => {
-  let circleColor = defaultColor; // 기본 색상
+  // 첫 번째 범위: 0 ~ thresholdArray[0]
+  if (currentValue <= thresholdArray[0].value) {
+    return thresholdArray[0].color;
+  }
 
-  for (let i = 0; i < thresholdArray.length; i++) {
-    if (currentValue <= thresholdArray[i].value) {
-      circleColor = thresholdArray[i].color;
-      break;
+  // 중간 범위들: thresholdArray[i-1] ~ thresholdArray[i]
+  for (let i = 1; i < thresholdArray.length; i++) {
+    if (
+      currentValue > thresholdArray[i - 1].value &&
+      currentValue <= thresholdArray[i].value
+    ) {
+      return thresholdArray[i].color;
     }
   }
 
-  return circleColor;
+  // 마지막 범위: thresholdArray[마지막] ~ 무한대
+  return thresholdArray[thresholdArray.length - 1].color;
 };
 
 export default getCircleColor;

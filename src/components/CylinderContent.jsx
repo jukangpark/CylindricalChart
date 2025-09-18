@@ -12,7 +12,7 @@ const CylinderContent = ({
   fillWidth,
   circleCount,
   thresholdArray,
-  maxValue = 1000,
+  maxValue,
 }) => {
   return (
     <CylinderFill

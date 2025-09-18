@@ -3,40 +3,63 @@ import React from "react";
 const CylinderCircleContainer = ({
   children,
   thresholdArray,
-  maxValue = 1000,
 }: {
   children: any;
   thresholdArray: Array<{ value: number; label: string; color: string }>;
-  maxValue?: number;
 }) => {
-  console.log("thresholdArray", thresholdArray);
-
   // children을 배열로 변환
   const childrenArray = React.Children.toArray(children);
 
   // 임계치별로 children을 그룹화
   const groups = [];
-  let currentIndex = 0;
 
   for (let i = 0; i < thresholdArray.length; i++) {
     const threshold = thresholdArray[i];
     const nextThreshold = thresholdArray[i + 1];
 
-    // 현재 임계치 범위에 해당하는 원의 개수 계산
-    const startRatio = i === 0 ? 0 : thresholdArray[i - 1].value / maxValue;
-    const endRatio = nextThreshold ? nextThreshold.value / maxValue : 1;
+    // 현재 임계치 범위에 해당하는 원의 개수 계산 (10단위 기반)
+    const startValue = i === 0 ? 0 : thresholdArray[i - 1].value;
+    const endValue = nextThreshold
+      ? nextThreshold.value
+      : childrenArray.length * 10;
 
-    const startIndex = Math.floor(startRatio * childrenArray.length);
-    const endIndex = Math.floor(endRatio * childrenArray.length);
+    const startIndex = Math.floor(startValue / 10);
+    const endIndex = Math.floor(endValue / 10);
 
     const groupChildren = childrenArray.slice(startIndex, endIndex);
 
-    // 각 그룹의 너비 비율 계산
-    const widthRatio = endRatio - startRatio;
+    // 각 그룹의 너비 비율 계산 (10단위 기반)
+    const widthRatio = (endValue - startValue) / (childrenArray.length * 10);
 
     if (groupChildren.length > 0) {
+      // children에 색상 적용
+      const coloredChildren = groupChildren.map((child, childIndex) => {
+        const clonedChild = React.cloneElement(child as React.ReactElement, {
+          ...child.props,
+          color: threshold.color, // 그룹의 색상으로 강제 설정
+        });
+
+        // CylinderSVG에도 색상 전달
+        if (
+          clonedChild.props.children &&
+          clonedChild.props.children.type?.name === "CylinderSVG"
+        ) {
+          const svgChild = React.cloneElement(clonedChild.props.children, {
+            ...clonedChild.props.children.props,
+            color: threshold.color,
+          });
+
+          return React.cloneElement(clonedChild, {
+            ...clonedChild.props,
+            children: svgChild,
+          });
+        }
+
+        return clonedChild;
+      });
+
       groups.push({
-        children: groupChildren,
+        children: coloredChildren,
         label: threshold.label,
         color: threshold.color,
         widthRatio: widthRatio, // 너비 비율 추가
