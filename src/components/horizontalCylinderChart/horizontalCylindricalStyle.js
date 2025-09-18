@@ -53,6 +53,7 @@ export const DotsContainer = styled.div`
   align-items: center;
   position: absolute;
   z-index: 1;
+  margin-top: -25px;
 
   &.left-dots {
     left: 10px;
@@ -68,6 +69,7 @@ export const Dot = styled.div`
   height: 7px;
   opacity: ${(props) => props.opacity};
   animation: ${fallAnimation} 0.6s ease-out ${(props) => props.delay}s infinite;
+  margin-top: ${(props) => props.randomMarginTop || 0}px;
 
   svg {
     width: 100%;

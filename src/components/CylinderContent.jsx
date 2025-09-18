@@ -7,13 +7,7 @@ import EntranceCylinderCircle from "./entrance/EntranceCylinderCircle.tsx";
 import CylinderCircles from "./CylinderCircles.jsx";
 import ExitCylinderCircle from "./exit/ExitCylinderCircle.tsx";
 
-const CylinderContent = ({
-  item,
-  fillWidth,
-  circleCount,
-  thresholdArray,
-  maxValue,
-}) => {
+const CylinderContent = ({ item, fillWidth, circleCount, thresholdArray }) => {
   return (
     <CylinderFill
       color={item.color}
@@ -30,7 +24,6 @@ const CylinderContent = ({
         <CylinderCircles
           circleCount={circleCount}
           thresholdArray={thresholdArray}
-          maxValue={maxValue}
           itemColor={item.color}
         />
       </div>

@@ -11,7 +11,7 @@ import CylinderContent from "../CylinderContent";
 
 const MAX_DOTS = 50;
 
-const HorizontalCylinderChart = ({ data, maxValue = 1000, thresholdArray }) => {
+const HorizontalCylinderChart = ({ data, thresholdArray }) => {
   return (
     <ChartsContainer>
       {data.map((item, index) => {
@@ -20,8 +20,6 @@ const HorizontalCylinderChart = ({ data, maxValue = 1000, thresholdArray }) => {
 
         // 가로로 배치된 원의 개수 (10으로 나누어서 계산)
         const circleCount = Math.max(Math.floor(item.value / 10), 1);
-
-        console.log("가로로 배치된 원의 개수", circleCount);
 
         // 왼쪽에서 오른쪽으로 흐르는 점 개수
         const totalDots = Math.min(item.value, MAX_DOTS);
@@ -36,7 +34,6 @@ const HorizontalCylinderChart = ({ data, maxValue = 1000, thresholdArray }) => {
                   fillWidth={fillWidth}
                   circleCount={circleCount}
                   thresholdArray={thresholdArray}
-                  maxValue={maxValue}
                 />
                 <DotsFlow totalDots={totalDots} position="right" />
               </Cylinder>

@@ -20,8 +20,17 @@ const DotsFlow = ({ totalDots, position = "left" }) => {
           ? i * 0.1
           : (totalDots - 1 - i) * 0.1 + delayOffset;
 
+        // 랜덤 marginTop (음수~양수, -20px ~ +20px 범위)
+        const randomMarginTop = (Math.random() - 0.5) * 40;
+
         return (
-          <Dot key={i} color={color} opacity={opacity} delay={delay}>
+          <Dot
+            key={i}
+            color={color}
+            opacity={opacity}
+            delay={delay}
+            randomMarginTop={randomMarginTop}
+          >
             <DotSVG color={color} />
           </Dot>
         );
