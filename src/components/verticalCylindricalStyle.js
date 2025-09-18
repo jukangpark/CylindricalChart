@@ -97,11 +97,10 @@ export const Dot = styled.div`
   animation: ${fallAnimation} 0.6s ease-out ${(props) => props.delay}s infinite;
 `;
 
-export const Cylinder = styled.div`
+export const VerticalCylinder = styled.div`
   position: relative;
   width: 80px;
   height: 300px;
-  background-color: #f8f9fa;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -153,15 +152,18 @@ export const CylinderFill = styled.div`
 
 export const ValueDisplay = styled.div`
   position: absolute;
-  bottom: 0%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  color: white;
-  font-size: 24px;
-  font-weight: 900;
-  text-shadow: -1px -1px 0 gray, 1px -1px 0 gray, -1px 1px 0 gray,
-    1px 1px 0 gray, 2px 2px 4px rgba(0, 0, 0, 0.8);
-  z-index: 2;
+  color: var(--text-standard-default, #1d1f20);
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  z-index: 3;
 `;
 
 /** 실린더 회색 컨테이너 아래에 표시되는 데이터 라벨 */

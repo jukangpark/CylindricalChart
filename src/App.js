@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import CylindricalChart from "./components/CylindricalChart";
-import HorizontalCylinderChart from "./components/HorizontalCylinderChart";
+import VerticalCylindricalChart from "./components/VerticalCylindricalChart";
+import HorizontalCylinderChart from "./components/horizontalCylinderChart/HorizontalCylinderChart";
 
 function App() {
   // threshold 값 설정 (이 값을 넘어가는 원들만 빨간색으로 표시)
@@ -12,37 +12,48 @@ function App() {
     {
       value: 20,
       label: "영업관리",
-      color: "#007bff",
     },
     {
       value: 314,
       label: "jennifer-pro>",
-      color: "#007bff",
     },
     {
       value: 150,
       label: "시스템관리",
-      color: "#007bff",
     },
     {
       value: 0,
       label: "test1",
-      color: "#007bff",
     },
     {
       value: 314,
       label: "test2",
-      color: "#007bff",
     },
     {
       value: 500,
       label: "test3",
-      color: "#007bff",
     },
     {
       value: 10,
       label: "test1",
-      color: "#007bff",
+    },
+  ];
+
+  const thresholdArray = [
+    {
+      value: 100,
+      label: "01",
+      color: "#A2D3F5",
+    },
+    {
+      value: 200,
+      label: "02",
+      color: "#FFE7AB",
+    },
+    {
+      value: 300,
+      label: "03",
+      color: "#DBCDFA",
     },
   ];
 
@@ -55,7 +66,7 @@ function App() {
       <main>
         <section>
           <h2>세로형 실린더 차트</h2>
-          <CylindricalChart
+          <VerticalCylindricalChart
             data={chartData}
             maxValue={500}
             threshold={threshold}
@@ -67,7 +78,7 @@ function App() {
           <HorizontalCylinderChart
             data={chartData}
             maxValue={500}
-            threshold={threshold}
+            thresholdArray={thresholdArray}
           />
         </section>
       </main>

@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 // 애니메이션 정의
 const fallAnimation = keyframes`
-  0% {
+ 0% {
     transform: translateX(-20px);
     opacity: 0;
   }
@@ -12,36 +12,6 @@ const fallAnimation = keyframes`
   100% {
     transform: translateX(0);
     opacity: 1;
-  }
-`;
-
-const waveAnimation = keyframes`
-  0% {
-    transform: scaleX(0.8) scaleY(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scaleX(1.2) scaleY(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scaleX(0.8) scaleY(1);
-    opacity: 0.5;
-  }
-`;
-
-const pulseAnimation = keyframes`
-  0% {
-    opacity: 0.3;
-    transform: scaleX(0.8) scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scaleX(0.8) scale(1.05);
-  }
-  100% {
-    opacity: 0.3;
-    transform: scaleX(0.8) scale(1);
   }
 `;
 
@@ -94,50 +64,128 @@ export const DotsContainer = styled.div`
 `;
 
 export const Dot = styled.div`
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
+  width: 73px;
+  height: 7px;
   opacity: ${(props) => props.opacity};
   animation: ${fallAnimation} 0.6s ease-out ${(props) => props.delay}s infinite;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Cylinder = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
-  background-color: #f8f9fa;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 `;
 
 export const CylinderCircle = styled.div`
-  width: 20px;
-  height: 100%;
-  border-radius: 50%;
-  background-color: ${(props) => props.color || "#007bff"};
+  width: 27px;
+  height: 60px;
   margin-right: -10px;
-  opacity: 0.5;
+  opacity: 1;
   transform: scaleX(0.8);
-  animation: ${waveAnimation} 8s ease-in-out ${(props) => props.delay * 0.5}s
-    infinite;
+  position: relative;
+  z-index: 2;
 
-  /* 물결 효과를 위한 추가 애니메이션 */
-  &:nth-child(even) {
-    animation: ${pulseAnimation} 4s ease-in-out ${(props) => props.delay * 0.8}s
-      infinite;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const LeftGradientCircle = styled.div`
+  width: 27px;
+  height: 60px;
+  margin-right: -10px;
+  opacity: 1;
+  transform: scaleX(0.8);
+  position: relative;
+  z-index: 1;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const EntranceGroup = styled.div`
+  position: relative;
+  width: 50px; /* 전체 그룹의 너비 */
+  height: 70px;
+  opacity: 1;
+  transform: scaleX(0.8);
+  z-index: 1;
+
+  svg {
+    position: absolute;
+    top: 0;
+    height: 100%;
   }
 
-  &:nth-child(odd) {
-    animation: ${waveAnimation} 8s ease-in-out ${(props) => props.delay * 0.5}s
-      infinite;
+  svg:nth-child(1) {
+    left: 5px;
+    width: 65px;
+    z-index: 3;
   }
 
-  &:last-child {
-    margin-right: 0;
+  svg:nth-child(2) {
+    left: 60px; /* 첫 번째 SVG와 겹치게 */
+    width: 19px;
+    z-index: 2;
   }
+
+  svg:nth-child(3) {
+    left: 60px; /* 두 번째 SVG와 겹치게 */
+    width: 19px;
+    z-index: 1;
+  }
+
+  /* SVG 내부 g 요소들 애니메이션 */
+  /* g {
+    animation: floatAnimation 1s ease-in-out infinite;
+  }
+
+  g:nth-child(odd) {
+    animation-delay: 0s;
+  }
+
+  g:nth-child(even) {
+    animation-delay: 1.5s;
+  }
+
+  g:nth-child(3n) {
+    animation-delay: 0.5s;
+  }
+
+  g:nth-child(4n) {
+    animation-delay: 2s;
+  }
+
+  g:nth-child(5n) {
+    animation-delay: 1s;
+  }
+
+  @keyframes floatAnimation {
+    0%,
+    100% {
+      transform: translateX(0px) scale(1);
+    }
+    25% {
+      transform: translateX(-3px) scale(1.05);
+    }
+    50% {
+      transform: translateX(-5px) scale(1.1);
+    }
+    75% {
+      transform: translateX(-2px) scale(1.02);
+    }
+  } */
 `;
 
 export const CylinderFill = styled.div`
@@ -162,11 +210,14 @@ export const ValueDisplay = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  color: white;
-  font-size: 20px;
-  font-weight: 900;
-  text-shadow: -1px -1px 0 gray, 1px -1px 0 gray, -1px 1px 0 gray,
-    1px 1px 0 gray, 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: var(--text-standard-default, #1d1f20);
+  text-align: center;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
   z-index: 3;
 `;
 

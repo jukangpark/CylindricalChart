@@ -6,18 +6,18 @@ import {
   CylinderContainer,
   DotsContainer,
   Dot,
-  Cylinder,
+  VerticalCylinder,
   CylinderFill,
   CylinderCircle,
   ValueDisplay,
   ChartLabel,
-} from "./cylindricalStyle";
+} from "./verticalCylindricalStyle";
 
 const MAX_DOTS = 50;
 const MAX_CIRCLE_COUNT = 25;
 const MAX_FILL_HEIGHT = 90;
 
-const CylindricalChart = ({ data, maxValue = 1000, threshold = 0 }) => {
+const VerticalCylindricalChart = ({ data, maxValue = 1000, threshold = 0 }) => {
   // 점들의 색상과 투명도 계산 함수
 
   return (
@@ -46,7 +46,7 @@ const CylindricalChart = ({ data, maxValue = 1000, threshold = 0 }) => {
           <ChartItem key={index}>
             <CylinderContainer>
               {/* 실린더 */}
-              <Cylinder>
+              <VerticalCylinder>
                 {/* 상단 점들 */}
                 <DotsContainer className="top-dots">
                   {[...Array(totalDots)].map((_, i) => {
@@ -97,7 +97,7 @@ const CylindricalChart = ({ data, maxValue = 1000, threshold = 0 }) => {
                     );
                   })}
                 </DotsContainer>
-              </Cylinder>
+              </VerticalCylinder>
             </CylinderContainer>
 
             {/* 라벨 */}
@@ -109,4 +109,4 @@ const CylindricalChart = ({ data, maxValue = 1000, threshold = 0 }) => {
   );
 };
 
-export default CylindricalChart;
+export default VerticalCylindricalChart;
