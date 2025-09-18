@@ -35,9 +35,6 @@ const CylinderCircleContainer = ({
     if (groupChildren.length > 0) {
       // children에 색상 적용
       const coloredChildren = groupChildren.map((child, childIndex) => {
-        console.log(
-          `Group ${i}, Child ${childIndex}: Applying color ${threshold.color}`
-        );
         const clonedChild = React.cloneElement(child as React.ReactElement, {
           ...child.props,
           color: threshold.color, // 그룹의 색상으로 강제 설정
@@ -48,9 +45,6 @@ const CylinderCircleContainer = ({
           clonedChild.props.children &&
           React.isValidElement(clonedChild.props.children)
         ) {
-          console.log(
-            `Group ${i}, Child ${childIndex}: Applying color to SVG: ${threshold.color}`
-          );
           const svgChild = React.cloneElement(clonedChild.props.children, {
             ...clonedChild.props.children.props,
             color: threshold.color,
