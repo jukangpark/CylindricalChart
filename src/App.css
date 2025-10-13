@@ -1,3 +1,8 @@
+/* 브라우저 기본 폰트 사용 */
+* {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
 .App {
   text-align: center;
   min-height: 100vh;
@@ -15,8 +20,4 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 300;
-}
-
-main {
-  padding: 20px;
 }

@@ -2,17 +2,17 @@ const thresholdArray = [
   {
     value: 100,
     label: "01",
-    color: "#A2D3F5",
+    color: "#58B0EC",
   },
   {
     value: 200,
     label: "02",
-    color: "#FFE7AB",
+    color: "#FED260",
   },
   {
     value: 300,
     label: "03",
-    color: "#DBCDFA",
+    color: "#B99FF8",
   },
 ];
 

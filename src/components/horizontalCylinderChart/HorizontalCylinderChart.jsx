@@ -2,8 +2,8 @@ import React from "react";
 import {
   ChartsContainer,
   ChartItem,
-  CylinderContainer,
-  Cylinder,
+  StyledCylinderContainer,
+  StyledCylinder,
   ChartLabel,
 } from "./horizontalCylindricalStyle";
 import DotsFlow from "../DotsFlow";
@@ -26,8 +26,8 @@ const HorizontalCylinderChart = ({ data, thresholdArray }) => {
 
         return (
           <ChartItem key={index}>
-            <CylinderContainer>
-              <Cylinder>
+            <StyledCylinderContainer>
+              <StyledCylinder>
                 <DotsFlow
                   totalDots={totalDots}
                   position="left"
@@ -44,8 +44,8 @@ const HorizontalCylinderChart = ({ data, thresholdArray }) => {
                   position="right"
                   thresholdArray={thresholdArray}
                 />
-              </Cylinder>
-            </CylinderContainer>
+              </StyledCylinder>
+            </StyledCylinderContainer>
             <ChartLabel>{item.label}</ChartLabel>
           </ChartItem>
         );

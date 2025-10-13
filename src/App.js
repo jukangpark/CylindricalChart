@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import VerticalCylindricalChart from "./components/VerticalCylindricalChart";
 import HorizontalCylinderChart from "./components/horizontalCylinderChart/HorizontalCylinderChart";
+import VerticalCylindricalChart from "./components/verticalCylinderChart/VerticalCylindricalChart";
 import chartData from "./mock/chartData.ts";
 import thresholdArray from "./mock/thresholdArray.ts";
 
@@ -18,11 +18,12 @@ function App() {
       <main>
         <section>
           <h2>세로형 실린더 차트</h2>
-          <VerticalCylindricalChart
-            data={chartData}
-            maxValue={500}
-            threshold={threshold}
-          />
+          <div>
+            <VerticalCylindricalChart
+              data={chartData}
+              thresholdArray={thresholdArray}
+            />
+          </div>
         </section>
 
         <section style={{ marginTop: "50px" }}>

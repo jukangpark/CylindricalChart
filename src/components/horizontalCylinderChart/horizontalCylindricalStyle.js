@@ -36,7 +36,7 @@ export const ChartItem = styled.div`
   max-width: 600px;
 `;
 
-export const CylinderContainer = styled.div`
+export const StyledCylinderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +77,7 @@ export const Dot = styled.div`
   }
 `;
 
-export const Cylinder = styled.div`
+export const StyledCylinder = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
@@ -89,7 +89,7 @@ export const Cylinder = styled.div`
 export const CylinderCircle = styled.div`
   width: 27px;
   height: 60px;
-  margin-right: -10px;
+  margin-right: -15px; // 원끼리 겹침의 정도
   opacity: 1;
   transform: scaleX(0.8);
   position: relative;
@@ -211,7 +211,7 @@ export const CylinderFill = styled.div`
 export const ValueDisplay = styled.div`
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
   color: var(--text-standard-default, #1d1f20);
   text-align: center;

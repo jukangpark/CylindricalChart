@@ -1,7 +1,7 @@
 import React from "react";
 import { EntranceGroup } from "../horizontalCylinderChart/horizontalCylindricalStyle.js";
 
-const EntranceCylinderCircle = () => {
+const HorizontalEntranceCylinderCircle = () => {
   return (
     <EntranceGroup>
       <svg
@@ -2055,4 +2055,4 @@ const EntranceCylinderCircle = () => {
   );
 };
 
-export default EntranceCylinderCircle;
+export default HorizontalEntranceCylinderCircle;
