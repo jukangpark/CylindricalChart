@@ -1,6 +1,6 @@
 import React from "react";
 
-const HorizontalExitCylinderCircle = () => {
+const SpeedExitCylinderCircle = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,4 +34,4 @@ const HorizontalExitCylinderCircle = () => {
   );
 };
 
-export default HorizontalExitCylinderCircle;
+export default SpeedExitCylinderCircle;

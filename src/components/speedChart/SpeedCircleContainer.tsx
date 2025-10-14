@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const CylinderCircleContainer = ({
+const SpeedCircleContainer = ({
   children,
   thresholdArray,
 }: {
@@ -170,4 +170,4 @@ const CylinderCircleContainer = ({
   );
 };
 
-export default CylinderCircleContainer;
+export default SpeedCircleContainer;

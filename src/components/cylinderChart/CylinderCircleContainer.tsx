@@ -8,7 +8,7 @@ interface Group {
   heightRatio: number;
 }
 
-const VerticalCylinderCircleContainer = ({
+const CylinderCircleContainer = ({
   children,
   thresholdArray,
 }: {
@@ -50,7 +50,7 @@ const VerticalCylinderCircleContainer = ({
           color: threshold.color, // 그룹의 색상으로 강제 설정
         });
 
-        // VerticalCylinderSVG에도 색상 전달
+        // CylinderSVG에도 색상 전달
         if (
           clonedChild.props.children &&
           React.isValidElement(clonedChild.props.children)
@@ -196,4 +196,4 @@ const VerticalCylinderCircleContainer = ({
   );
 };
 
-export default VerticalCylinderCircleContainer;
+export default CylinderCircleContainer;

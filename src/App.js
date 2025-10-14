@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import HorizontalCylinderChart from "./components/horizontalCylinderChart/HorizontalCylinderChart";
-import VerticalCylindricalChart from "./components/verticalCylinderChart/VerticalCylindricalChart";
+import SpeedChart from "./components/speedChart/SpeedChart";
+import CylinderChart from "./components/cylinderChart/CylinderChart";
 import chartData from "./mock/chartData.ts";
 import thresholdArray from "./mock/thresholdArray.ts";
 
@@ -17,21 +17,15 @@ function App() {
       </header>
       <main>
         <section>
-          <h2>세로형 실린더 차트</h2>
+          <h2>실린더 차트</h2>
           <div>
-            <VerticalCylindricalChart
-              data={chartData}
-              thresholdArray={thresholdArray}
-            />
+            <CylinderChart data={chartData} thresholdArray={thresholdArray} />
           </div>
         </section>
 
         <section style={{ marginTop: "50px" }}>
-          <h2>가로형 실린더 차트</h2>
-          <HorizontalCylinderChart
-            data={chartData}
-            thresholdArray={thresholdArray}
-          />
+          <h2>스피드 차트</h2>
+          <SpeedChart data={chartData} thresholdArray={thresholdArray} />
         </section>
       </main>
     </div>

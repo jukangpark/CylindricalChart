@@ -15,7 +15,7 @@ const fallAnimation = keyframes`
 `;
 
 // Styled Components
-export const ChartsContainer = styled.div`
+export const SpeedChartsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -26,7 +26,7 @@ export const ChartsContainer = styled.div`
   min-height: 400px;
 `;
 
-export const ChartItem = styled.div`
+export const SpeedChartItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@ export const ChartItem = styled.div`
   max-width: 600px;
 `;
 
-export const StyledCylinderContainer = styled.div`
+export const StyledSpeedCylinderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +45,7 @@ export const StyledCylinderContainer = styled.div`
   width: 100%;
 `;
 
-export const DotsContainer = styled.div`
+export const SpeedDotsContainer = styled.div`
   display: flex;
   flex-direction: row;
   gap: 4px;
@@ -63,7 +63,7 @@ export const DotsContainer = styled.div`
   }
 `;
 
-export const Dot = styled.div`
+export const StyledSpeedDot = styled.div`
   width: 73px;
   height: 7px;
   opacity: ${(props) => props.opacity};
@@ -77,7 +77,7 @@ export const Dot = styled.div`
   }
 `;
 
-export const StyledCylinder = styled.div`
+export const StyledSpeedCylinder = styled.div`
   position: relative;
   width: 100%;
   height: 80px;
@@ -86,7 +86,7 @@ export const StyledCylinder = styled.div`
   justify-content: flex-start;
 `;
 
-export const CylinderCircle = styled.div`
+export const SpeedCylinderCircle = styled.div`
   width: 27px;
   height: 60px;
   margin-right: -15px; // 원끼리 겹침의 정도
@@ -101,7 +101,7 @@ export const CylinderCircle = styled.div`
   }
 `;
 
-export const LeftGradientCircle = styled.div`
+export const SpeedLeftGradientCircle = styled.div`
   width: 27px;
   height: 60px;
   margin-right: -10px;
@@ -116,7 +116,7 @@ export const LeftGradientCircle = styled.div`
   }
 `;
 
-export const EntranceGroup = styled.div`
+export const SpeedEntranceGroup = styled.div`
   position: relative;
   width: 50px; /* 전체 그룹의 너비 */
   height: 70px;
@@ -148,50 +148,9 @@ export const EntranceGroup = styled.div`
     width: 19px;
     z-index: 1;
   }
-
-  /* SVG 내부 g 요소들 애니메이션 */
-  /* g {
-    animation: floatAnimation 1s ease-in-out infinite;
-  }
-
-  g:nth-child(odd) {
-    animation-delay: 0s;
-  }
-
-  g:nth-child(even) {
-    animation-delay: 1.5s;
-  }
-
-  g:nth-child(3n) {
-    animation-delay: 0.5s;
-  }
-
-  g:nth-child(4n) {
-    animation-delay: 2s;
-  }
-
-  g:nth-child(5n) {
-    animation-delay: 1s;
-  }
-
-  @keyframes floatAnimation {
-    0%,
-    100% {
-      transform: translateX(0px) scale(1);
-    }
-    25% {
-      transform: translateX(-3px) scale(1.05);
-    }
-    50% {
-      transform: translateX(-5px) scale(1.1);
-    }
-    75% {
-      transform: translateX(-2px) scale(1.02);
-    }
-  } */
 `;
 
-export const CylinderFill = styled.div`
+export const SpeedCylinderFill = styled.div`
   height: 100%;
   background-color: transparent;
   border-radius: 40px;
@@ -208,7 +167,7 @@ export const CylinderFill = styled.div`
   z-index: 2;
 `;
 
-export const ValueDisplay = styled.div`
+export const SpeedValueDisplay = styled.div`
   position: absolute;
   left: 50%;
   top: 40%;
@@ -224,7 +183,7 @@ export const ValueDisplay = styled.div`
   z-index: 3;
 `;
 
-export const ChartLabel = styled.div`
+export const SpeedChartLabel = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: #333;

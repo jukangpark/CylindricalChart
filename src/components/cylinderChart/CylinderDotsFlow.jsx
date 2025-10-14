@@ -1,19 +1,19 @@
 import React from "react";
-import getDotStyle from "../func/getDotStyle";
+import getDotStyle from "../../func/getDotStyle.js";
 import {
-  VerticalDotsContainer,
-  VerticalDot,
-} from "../components/verticalCylinderChart/verticalCylindricalStyle.js";
-import VerticalDotSVG from "../components/VerticalDotSVG.tsx";
+  CylinderDotsContainer,
+  StyledCylinderDot,
+} from "./cylinderChartStyle.js";
+import CylinderDot from "./CylinderDot.tsx";
 
-const VerticalDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
+const CylinderDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
   if (totalDots <= 0) return null;
 
   const isBottom = position === "bottom";
   const delayOffset = isBottom ? 0 : 0.4;
 
   return (
-    <VerticalDotsContainer className={`${position}-dots`}>
+    <CylinderDotsContainer className={`${position}-dots`}>
       {[...Array(totalDots)].map((_, i) => {
         const { color, opacity } = getDotStyle(i, totalDots);
         const delay = isBottom
@@ -31,19 +31,19 @@ const VerticalDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
         }
 
         return (
-          <VerticalDot
+          <StyledCylinderDot
             key={i}
             color={dotColor}
             opacity={opacity}
             delay={delay}
             randomMarginLeft={randomMarginLeft}
           >
-            <VerticalDotSVG color={dotColor} />
-          </VerticalDot>
+            <CylinderDot color={dotColor} />
+          </StyledCylinderDot>
         );
       })}
-    </VerticalDotsContainer>
+    </CylinderDotsContainer>
   );
 };
 
-export default VerticalDotsFlow;
+export default CylinderDotsFlow;

@@ -1,9 +1,9 @@
 import React from "react";
-import { EntranceGroup } from "../horizontalCylinderChart/horizontalCylindricalStyle.js";
+import { SpeedEntranceGroup } from "../speedChart/speedChartStyle.js";
 
-const HorizontalEntranceCylinderCircle = () => {
+const SpeedEntranceCylinderCircle = () => {
   return (
-    <EntranceGroup>
+    <SpeedEntranceGroup>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="65"
@@ -2051,8 +2051,8 @@ const HorizontalEntranceCylinderCircle = () => {
           </radialGradient>
         </defs>
       </svg>
-    </EntranceGroup>
+    </SpeedEntranceGroup>
   );
 };
 
-export default HorizontalEntranceCylinderCircle;
+export default SpeedEntranceCylinderCircle;

@@ -1,11 +1,11 @@
 import React from "react";
 
-const CylinderSVG = ({ color = "#797F81" }: { color?: string }) => {
+const CylinderCircle = ({ color = "#797F81" }: { color?: string }) => {
   return (
     <div
       style={{
-        width: "27px",
-        height: "60px",
+        width: "60px",
+        height: "27px",
         backgroundColor: color,
         borderRadius: "50%",
         opacity: 0.8,
@@ -16,4 +16,4 @@ const CylinderSVG = ({ color = "#797F81" }: { color?: string }) => {
   );
 };
 
-export default CylinderSVG;
+export default CylinderCircle;

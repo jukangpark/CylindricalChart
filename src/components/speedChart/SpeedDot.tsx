@@ -1,6 +1,6 @@
 import React from "react";
 
-const DotSVG = React.memo(({ color = "#87C2ED" }: { color?: string }) => {
+const SpeedDot = React.memo(({ color = "#87C2ED" }: { color?: string }) => {
   return (
     <div
       style={{
@@ -15,4 +15,4 @@ const DotSVG = React.memo(({ color = "#87C2ED" }: { color?: string }) => {
   );
 });
 
-export default DotSVG;
+export default SpeedDot;

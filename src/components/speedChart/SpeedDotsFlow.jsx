@@ -1,19 +1,16 @@
 import React from "react";
-import getDotStyle from "../func/getDotStyle";
-import {
-  DotsContainer,
-  Dot,
-} from "../components/horizontalCylinderChart/horizontalCylindricalStyle.js";
-import DotSVG from "../components/DotSVG.tsx";
+import getDotStyle from "../../func/getDotStyle.js";
+import { SpeedDotsContainer, StyledSpeedDot } from "./speedChartStyle.js";
+import SpeedDot from "./SpeedDot.tsx";
 
-const DotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
+const SpeedDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
   if (totalDots <= 0) return null;
 
   const isRight = position === "right";
   const delayOffset = isRight ? 0 : 0.4;
 
   return (
-    <DotsContainer className={`${position}-dots`}>
+    <SpeedDotsContainer className={`${position}-dots`}>
       {[...Array(totalDots)].map((_, i) => {
         const { color, opacity } = getDotStyle(i, totalDots);
         const delay = isRight
@@ -31,19 +28,19 @@ const DotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
         }
 
         return (
-          <Dot
+          <StyledSpeedDot
             key={i}
             color={color}
             opacity={opacity}
             delay={delay}
             randomMarginTop={randomMarginTop}
           >
-            <DotSVG color={dotColor} />
-          </Dot>
+            <SpeedDot color={dotColor} />
+          </StyledSpeedDot>
         );
       })}
-    </DotsContainer>
+    </SpeedDotsContainer>
   );
 };
 
-export default DotsFlow;
+export default SpeedDotsFlow;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const VerticalExitCylinderCircle = () => {
+const CylinderExitCircle = () => {
   return (
     <svg
       width="58.43"
@@ -79,4 +79,4 @@ const VerticalExitCylinderCircle = () => {
   );
 };
 
-export default VerticalExitCylinderCircle;
+export default CylinderExitCircle;

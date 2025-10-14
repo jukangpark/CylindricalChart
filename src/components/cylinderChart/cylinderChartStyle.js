@@ -15,7 +15,7 @@ const fallAnimation = keyframes`
 `;
 
 // Styled Components
-export const VerticalChartsContainer = styled.div`
+export const CylinderChartsContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -28,7 +28,7 @@ export const VerticalChartsContainer = styled.div`
   overflow: hidden;
 `;
 
-export const StyledVerticalChartItem = styled.div`
+export const StyledCylinderChartItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,7 +39,7 @@ export const StyledVerticalChartItem = styled.div`
   justify-content: center;
 `;
 
-export const StyledVerticalStyledCylinderContainer = styled.div`
+export const StyledCylinderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,7 +50,7 @@ export const StyledVerticalStyledCylinderContainer = styled.div`
   width: 100%;
 `;
 
-export const VerticalDotsContainer = styled.div`
+export const CylinderDotsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -70,7 +70,7 @@ export const VerticalDotsContainer = styled.div`
   }
 `;
 
-export const VerticalDot = styled.div`
+export const StyledCylinderDot = styled.div`
   width: 7px;
   height: 73px;
   opacity: ${(props) => props.opacity};
@@ -84,7 +84,7 @@ export const VerticalDot = styled.div`
   }
 `;
 
-export const VerticalStyledCylinder = styled.div`
+export const StyledCylinder = styled.div`
   position: relative;
   width: 80px;
   height: 100%;
@@ -94,7 +94,7 @@ export const VerticalStyledCylinder = styled.div`
   justify-content: center;
 `;
 
-export const VerticalCylinderCircle = styled.div`
+export const StyledCylinderCircle = styled.div`
   width: 60px;
   height: 27px;
   margin-bottom: -10px; // 원끼리 겹침의 정도
@@ -109,7 +109,7 @@ export const VerticalCylinderCircle = styled.div`
   }
 `;
 
-export const VerticalLeftGradientCircle = styled.div`
+export const CylinderLeftGradientCircle = styled.div`
   width: 60px;
   height: 27px;
   margin-bottom: -10px;
@@ -124,7 +124,7 @@ export const VerticalLeftGradientCircle = styled.div`
   }
 `;
 
-export const VerticalEntranceGroup = styled.div`
+export const CylinderEntranceGroup = styled.div`
   position: relative;
   width: 70px; /* 전체 그룹의 높이 */
   height: 50px;
@@ -158,7 +158,7 @@ export const VerticalEntranceGroup = styled.div`
   }
 `;
 
-export const VerticalCylinderFill = styled.div`
+export const CylinderFill = styled.div`
   width: 100%;
   background-color: transparent;
   border-radius: 40px;
@@ -175,7 +175,7 @@ export const VerticalCylinderFill = styled.div`
   z-index: 2;
 `;
 
-export const VerticalValueDisplay = styled.div`
+export const CylinderValueDisplay = styled.div`
   position: absolute;
   left: 60%;
   top: 50%;
@@ -193,7 +193,7 @@ export const VerticalValueDisplay = styled.div`
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 `;
 
-export const VerticalChartLabel = styled.div`
+export const CylinderChartLabel = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: #333;

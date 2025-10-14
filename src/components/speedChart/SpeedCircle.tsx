@@ -1,11 +1,11 @@
 import React from "react";
 
-const VerticalCylinderSVG = ({ color = "#797F81" }: { color?: string }) => {
+const SpeedCircle = ({ color = "#797F81" }: { color?: string }) => {
   return (
     <div
       style={{
-        width: "60px",
-        height: "27px",
+        width: "27px",
+        height: "60px",
         backgroundColor: color,
         borderRadius: "50%",
         opacity: 0.8,
@@ -16,4 +16,4 @@ const VerticalCylinderSVG = ({ color = "#797F81" }: { color?: string }) => {
   );
 };
 
-export default VerticalCylinderSVG;
+export default SpeedCircle;

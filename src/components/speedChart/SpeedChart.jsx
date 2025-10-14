@@ -1,19 +1,19 @@
 import React from "react";
 import {
-  ChartsContainer,
-  ChartItem,
-  StyledCylinderContainer,
-  StyledCylinder,
-  ChartLabel,
-} from "./horizontalCylindricalStyle";
-import DotsFlow from "../DotsFlow";
-import CylinderContent from "../CylinderContent";
+  SpeedChartsContainer,
+  SpeedChartItem,
+  StyledSpeedCylinderContainer,
+  StyledSpeedCylinder,
+  SpeedChartLabel,
+} from "./speedChartStyle";
+import SpeedDotsFlow from "./SpeedDotsFlow";
+import SpeedChartContent from "./SpeedChartContent";
 
 const MAX_DOTS = 50;
 
-const HorizontalCylinderChart = ({ data, thresholdArray }) => {
+const SpeedChart = ({ data, thresholdArray }) => {
   return (
-    <ChartsContainer>
+    <SpeedChartsContainer>
       {data.map((item, index) => {
         // 실린더 채워지는 너비 (10으로 나누어서 계산)
         const fillWidth = item.value / 10;
@@ -25,33 +25,33 @@ const HorizontalCylinderChart = ({ data, thresholdArray }) => {
         const totalDots = Math.min(item.value, MAX_DOTS);
 
         return (
-          <ChartItem key={index}>
-            <StyledCylinderContainer>
-              <StyledCylinder>
-                <DotsFlow
+          <SpeedChartItem key={index}>
+            <StyledSpeedCylinderContainer>
+              <StyledSpeedCylinder>
+                <SpeedDotsFlow
                   totalDots={totalDots}
                   position="left"
                   thresholdArray={thresholdArray}
                 />
-                <CylinderContent
+                <SpeedChartContent
                   item={item}
                   fillWidth={fillWidth}
                   circleCount={circleCount}
                   thresholdArray={thresholdArray}
                 />
-                <DotsFlow
+                <SpeedDotsFlow
                   totalDots={totalDots}
                   position="right"
                   thresholdArray={thresholdArray}
                 />
-              </StyledCylinder>
-            </StyledCylinderContainer>
-            <ChartLabel>{item.label}</ChartLabel>
-          </ChartItem>
+              </StyledSpeedCylinder>
+            </StyledSpeedCylinderContainer>
+            <SpeedChartLabel>{item.label}</SpeedChartLabel>
+          </SpeedChartItem>
         );
       })}
-    </ChartsContainer>
+    </SpeedChartsContainer>
   );
 };
 
-export default HorizontalCylinderChart;
+export default SpeedChart;
