@@ -4,7 +4,6 @@ import styled, { keyframes } from "styled-components";
 const fallAnimation = keyframes`
  0% {
     transform: translateX(-20px);
-    opacity: 0;
   }
   50% {
     opacity: 1;
@@ -68,7 +67,8 @@ export const Dot = styled.div`
   width: 73px;
   height: 7px;
   opacity: ${(props) => props.opacity};
-  animation: ${fallAnimation} 0.6s ease-out ${(props) => props.delay}s infinite;
+  animation: ${fallAnimation} 2s ease-in-out infinite;
+  animation-delay: ${(props) => props.delay || 0}s;
   margin-top: ${(props) => props.randomMarginTop || 0}px;
 
   svg {
