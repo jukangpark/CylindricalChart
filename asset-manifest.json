@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/CylindricalChart/static/css/main.765bce16.css",
-    "main.js": "/CylindricalChart/static/js/main.a3bb6060.js",
+    "main.js": "/CylindricalChart/static/js/main.a7cdc9f8.js",
     "index.html": "/CylindricalChart/index.html",
     "main.765bce16.css.map": "/CylindricalChart/static/css/main.765bce16.css.map",
-    "main.a3bb6060.js.map": "/CylindricalChart/static/js/main.a3bb6060.js.map"
+    "main.a7cdc9f8.js.map": "/CylindricalChart/static/js/main.a7cdc9f8.js.map"
   },
   "entrypoints": [
     "static/css/main.765bce16.css",
-    "static/js/main.a3bb6060.js"
+    "static/js/main.a7cdc9f8.js"
   ]
 }
