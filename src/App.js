@@ -1,32 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import SpeedChart from "./components/speedChart/SpeedChart";
-import CylinderChart from "./components/cylinderChart/CylinderChart";
-import chartData from "./mock/chartData.ts";
+import CylinderChartSection from "./components/sections/CylinderChartSection";
+import SpeedChartSection from "./components/sections/SpeedChartSection";
+import { cylinderChartDataExample1 } from "./mock/cylinderChartData.ts";
+import { defaultSpeedChartData } from "./mock/speedChartData.ts";
 import thresholdArray from "./mock/thresholdArray.ts";
+import { refreshChartData } from "./services/chartDataMapper";
 
 function App() {
   // threshold 값 설정 (이 값을 넘어가는 원들만 빨간색으로 표시)
   const threshold = 300;
+
+  // 동적 차트 데이터 상태
+  const [cylinderData, setCylinderData] = useState(cylinderChartDataExample1);
+  const [speedData, setSpeedData] = useState(defaultSpeedChartData);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // API 요청 시뮬레이션 버튼 클릭 시 차트 데이터 업데이트
+  const handleCylinderApiRequest = async (newSettings) => {
+    try {
+      setIsLoading(true);
+      const newData = await refreshChartData(newSettings, "cylinder");
+      if (newData.length > 0) {
+        setCylinderData(newData);
+        console.log("🔄 실린더 차트 데이터 업데이트:", newData);
+      }
+    } catch (error) {
+      console.error("실린더 차트 데이터 업데이트 실패:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSpeedApiRequest = async (newSettings) => {
+    try {
+      setIsLoading(true);
+      const newData = await refreshChartData(newSettings, "speed");
+      if (newData.length > 0) {
+        setSpeedData(newData);
+        console.log("🔄 스피드 차트 데이터 업데이트:", newData);
+      }
+    } catch (error) {
+      console.error("스피드 차트 데이터 업데이트 실패:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>실린더 차트 예시</h1>
         <p>Threshold: {threshold} (이 값을 넘어가는 원들만 빨간색으로 표시)</p>
+        {isLoading && (
+          <p style={{ color: "#667eea" }}>🔄 차트 데이터 업데이트 중...</p>
+        )}
       </header>
       <main>
-        <section>
-          <h2>실린더 차트</h2>
-          <div>
-            <CylinderChart data={chartData} thresholdArray={thresholdArray} />
-          </div>
-        </section>
+        <CylinderChartSection
+          data={cylinderData}
+          thresholdArray={thresholdArray}
+          onApiRequest={handleCylinderApiRequest}
+        />
 
-        <section style={{ marginTop: "50px" }}>
-          <h2>스피드 차트</h2>
-          <SpeedChart data={chartData} thresholdArray={thresholdArray} />
-        </section>
+        <SpeedChartSection
+          data={speedData}
+          thresholdArray={thresholdArray}
+          onApiRequest={handleSpeedApiRequest}
+        />
       </main>
     </div>
   );

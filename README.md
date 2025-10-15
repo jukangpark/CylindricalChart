@@ -515,6 +515,436 @@ POST /api/widget/live/speedChart
 }
 ```
 
+### Cylinder Chart API
+
+#### 엔드포인트
+
+```
+POST /api/widget/live/cylinderChart
+```
+
+#### 설명
+
+실린더 차트 위젯을 위한 데이터를 조회합니다. 3D 실린더 형태로 데이터를 시각화합니다.
+
+#### 위젯 구조
+
+- **CylinderChartWidget** extends **InOutDataConditionWidget**
+
+#### 필수 속성
+
+- `visualization`: 위젯 타입 (CYLINDER_CHART)
+- `dataConditionType`: 데이터 조건 타입 (INDIVIDUAL 권장)
+
+#### CylinderChartWidget 고유 속성
+
+- `viewCount`: 표시할 실린더 개수 (AUTO, FIVE, TEN, TWENTY)
+- `rotationTime`: 데이터 회전 주기 (AUTO, SEC_10, SEC_30, MIN_1)
+
+#### InOutDataConditionWidget 속성
+
+- `tagFilters`: 전역 태그 필터 배열 (선택)
+- `inData`: 인바운드 메트릭 데이터 (MetricData 객체, 선택)
+- `dataCondition`: 메인 데이터 조건 (DataCondition 객체, 선택)
+- `outData`: 아웃바운드 메트릭 데이터 (MetricData 객체, 선택)
+
+#### DataCondition 구조
+
+- `metricData`: MetricData 배열 (필수)
+- `definition`: MeasurementDefinition 객체 (메트릭 정의)
+- `tagFilters`: 메트릭별 태그 필터 배열 (빈 배열 가능)
+- `metricValueTypes`: 값 타입 배열 ["avg", "max", "min"]
+- `groupBys`: 그룹화 필드 배열 (빈 배열 가능)
+- `limitCount`: 제한 개수 (빈 문자열은 제한 없음)
+- `metricCalculation`: 계산 방식 (NONE, ALL, INDIVIDUAL)
+- `calculationType`: 집계 타입 (AVG, MAX, MIN, SUM) - metricCalculation이 ALL일 때 필요
+- `mode`: 데이터 모드 (NOW: 현재 시간 기준, RAW: 지정된 시간 범위)
+- `startTime`, `endTime`: 조회 시간 범위 (Unix timestamp, milliseconds)
+- `interval`: 데이터 간격 (초, 0은 간격 없음)
+
+#### 사용 패턴
+
+1. **dataCondition만 사용**: 단일 메트릭 데이터 조회
+2. **inData + outData 사용**: 인/아웃바운드 메트릭 비교
+3. **tagFilters 적용**: 전역 태그 조건으로 필터링
+4. **모든 속성 조합**: 복합 메트릭 분석
+
+#### 예시 1: 단일 DataCondition 사용
+
+**Request Body:**
+
+```json
+{
+  "visualization": "CYLINDER_CHART",
+  "viewCount": "TEN",
+  "rotationTime": "SEC_10",
+  "dataConditionType": "INDIVIDUAL",
+  "dataCondition": {
+    "metricData": [
+      {
+        "definition": {
+          "id": "server.Cpu_Utilization",
+          "resourceType": "server.Cpu",
+          "name": "Utilization",
+          "displayName": "CPU 사용률",
+          "displayKey": "sms.cpu_utilization",
+          "alias": "U",
+          "units": "PERCENTAGE",
+          "measurementType": "METRIC",
+          "numericType": "DYNAMIC",
+          "deleted": false,
+          "protocolInfo": "4.3.24.0",
+          "osType": "ALL"
+        },
+        "tagFilters": ["confType = server"],
+        "metricValueTypes": ["avg"],
+        "groupBys": [],
+        "limitCount": ""
+      }
+    ],
+    "metricCalculation": "NONE",
+    "mode": "NOW",
+    "startTime": 1760135349665,
+    "endTime": 1760156949665,
+    "interval": 0
+  }
+}
+```
+
+**Response Body:**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "timestamp": 1760156880000,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.483333333333334,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4749999999999999,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.708333333333333,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 20.458333333333332
+    },
+    {
+      "timestamp": 1760156760000,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.833333333333333,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 19.32083333333334,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4916666666666667,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.591666666666667
+    },
+    {
+      "timestamp": 1760156640000,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.620833333333334,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4833333333333334,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 25.87083333333333,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.545833333333333
+    }
+  ],
+  "errorCode": null,
+  "errorMsgArgs": null,
+  "errorData": null
+}
+```
+
+#### 예시 2: InData/OutData 비교 (CPU vs 메모리)
+
+**Request Body:**
+
+```json
+{
+  "visualization": "CYLINDER_CHART",
+  "viewCount": "TWENTY",
+  "rotationTime": "SEC_30",
+  "dataConditionType": "INDIVIDUAL",
+  "tagFilters": ["confType = server"],
+  "inData": {
+    "definition": {
+      "id": "server.Cpu_Utilization",
+      "resourceType": "server.Cpu",
+      "name": "Utilization",
+      "displayName": "CPU 사용률",
+      "displayKey": "sms.cpu_utilization",
+      "alias": "U",
+      "units": "PERCENTAGE",
+      "measurementType": "METRIC",
+      "numericType": "DYNAMIC",
+      "deleted": false,
+      "protocolInfo": "4.3.24.0",
+      "osType": "ALL"
+    },
+    "tagFilters": [],
+    "metricValueTypes": ["avg"],
+    "groupBys": [],
+    "limitCount": ""
+  },
+  "outData": {
+    "definition": {
+      "id": "server.Memory_Utilization",
+      "resourceType": "server.Memory",
+      "name": "Utilization",
+      "displayName": "메모리 사용률",
+      "displayKey": "sms.memory_utilization",
+      "alias": "U",
+      "units": "PERCENTAGE",
+      "measurementType": "METRIC",
+      "numericType": "DYNAMIC",
+      "deleted": false,
+      "protocolInfo": "4.4.5.0",
+      "osType": "ALL"
+    },
+    "tagFilters": [],
+    "metricValueTypes": ["max"],
+    "groupBys": [],
+    "limitCount": ""
+  }
+}
+```
+
+**Response Body:**
+
+```json
+{
+  "success": true,
+  "data": [],
+  "errorCode": null,
+  "errorMsgArgs": null,
+  "errorData": null
+}
+```
+
+#### 예시 3: 태그 필터 + DataCondition (GroupBy 활용)
+
+**Request Body:**
+
+```json
+{
+  "visualization": "CYLINDER_CHART",
+  "viewCount": "FIVE",
+  "rotationTime": "MIN_1",
+  "tagFilters": ["confType = server"],
+  "dataConditionType": "INDIVIDUAL",
+  "dataCondition": {
+    "metricData": [
+      {
+        "definition": {
+          "id": "server.FileSystem_Utilization",
+          "resourceType": "server.FileSystem",
+          "name": "Utilization",
+          "displayName": "파일시스템 사용률",
+          "displayKey": "sms.filesystem_utilization",
+          "alias": "U",
+          "units": "PERCENTAGE",
+          "measurementType": "METRIC",
+          "numericType": "DYNAMIC",
+          "deleted": false,
+          "protocolInfo": "USAGE",
+          "osType": "ALL"
+        },
+        "tagFilters": [],
+        "metricValueTypes": ["avg"],
+        "groupBys": [],
+        "limitCount": ""
+      }
+    ],
+    "metricCalculation": "NONE",
+    "calculationType": "AVG",
+    "mode": "NOW",
+    "startTime": 1760135349665,
+    "endTime": 1760156949665,
+    "interval": 0
+  }
+}
+```
+
+**Response Body:**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "timestamp": 1760156880000,
+      "/boot_server.FileSystem_Utilization_avg": 44.1,
+      "/data4_server.FileSystem_Utilization_avg": 12.57,
+      "/app_server.FileSystem_Utilization_avg": 39.09,
+      "/data_server.FileSystem_Utilization_avg": 9.69,
+      "/boot/efi_server.FileSystem_Utilization_avg": 0.57,
+      "/_server.FileSystem_Utilization_avg": 69.06,
+      "/home_server.FileSystem_Utilization_avg": 34.19,
+      "/data3_server.FileSystem_Utilization_avg": 2.41,
+      "/var/snap/firefox/common/host-hunspell_server.FileSystem_Utilization_avg": 50.95
+    },
+    {
+      "timestamp": 1760156760000,
+      "/data_server.FileSystem_Utilization_avg": 9.69,
+      "/boot_server.FileSystem_Utilization_avg": 13.79,
+      "/app_server.FileSystem_Utilization_avg": 36.31,
+      "/_server.FileSystem_Utilization_avg": 50.95,
+      "/home_server.FileSystem_Utilization_avg": 34.19,
+      "/boot/efi_server.FileSystem_Utilization_avg": 2.57,
+      "/var/snap/firefox/common/host-hunspell_server.FileSystem_Utilization_avg": 50.95,
+      "/data3_server.FileSystem_Utilization_avg": 2.41,
+      "/data4_server.FileSystem_Utilization_avg": 12.57
+    },
+    {
+      "timestamp": 1760156640000,
+      "/boot_server.FileSystem_Utilization_avg": 57.73,
+      "/boot/efi_server.FileSystem_Utilization_avg": 0.57,
+      "/_server.FileSystem_Utilization_avg": 25.29,
+      "/app_server.FileSystem_Utilization_avg": 74.4,
+      "/home_server.FileSystem_Utilization_avg": 34.19,
+      "/data_server.FileSystem_Utilization_avg": 9.69,
+      "/data4_server.FileSystem_Utilization_avg": 12.57,
+      "/data3_server.FileSystem_Utilization_avg": 2.41,
+      "/var/snap/firefox/common/host-hunspell_server.FileSystem_Utilization_avg": 50.95
+    }
+  ],
+  "errorCode": null,
+  "errorMsgArgs": null,
+  "errorData": null
+}
+```
+
+#### 예시 4: 모든 속성 사용 (InData + OutData + DataCondition + TagFilters)
+
+**Request Body:**
+
+```json
+{
+  "visualization": "CYLINDER_CHART",
+  "viewCount": "TEN",
+  "rotationTime": "SEC_30",
+  "dataConditionType": "INDIVIDUAL",
+  "tagFilters": ["confType = server"],
+  "inData": {
+    "definition": {
+      "id": "server.Cpu_Utilization",
+      "resourceType": "server.Cpu",
+      "name": "Utilization",
+      "displayName": "CPU 사용률",
+      "displayKey": "sms.cpu_utilization",
+      "alias": "U",
+      "units": "PERCENTAGE",
+      "measurementType": "METRIC",
+      "numericType": "DYNAMIC",
+      "deleted": false,
+      "protocolInfo": "4.3.24.0",
+      "osType": "ALL"
+    },
+    "tagFilters": [],
+    "metricValueTypes": ["avg"],
+    "groupBys": [],
+    "limitCount": ""
+  },
+  "outData": {
+    "definition": {
+      "id": "server.Memory_Utilization",
+      "resourceType": "server.Memory",
+      "name": "Utilization",
+      "displayName": "메모리 사용률",
+      "displayKey": "sms.memory_utilization",
+      "alias": "U",
+      "units": "PERCENTAGE",
+      "measurementType": "METRIC",
+      "numericType": "DYNAMIC",
+      "deleted": false,
+      "protocolInfo": "4.4.5.0",
+      "osType": "ALL"
+    },
+    "tagFilters": [],
+    "metricValueTypes": ["avg"],
+    "groupBys": [],
+    "limitCount": ""
+  },
+  "dataCondition": {
+    "metricData": [
+      {
+        "definition": {
+          "id": "server.FileSystems_Utilization",
+          "resourceType": "server.FileSystems",
+          "name": "Utilization",
+          "displayName": "파일시스템들 사용률",
+          "displayKey": "sms.filesystems_utilization",
+          "alias": "U",
+          "units": "PERCENTAGE",
+          "measurementType": "METRIC",
+          "numericType": "DYNAMIC",
+          "deleted": false,
+          "protocolInfo": "USAGE",
+          "osType": "ALL"
+        },
+        "tagFilters": [],
+        "metricValueTypes": ["avg"],
+        "groupBys": [],
+        "limitCount": ""
+      }
+    ],
+    "metricCalculation": "NONE",
+    "mode": "NOW",
+    "startTime": 1760135349665,
+    "endTime": 1760156949665,
+    "interval": 0
+  }
+}
+```
+
+**Response Body:**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "timestamp": 1760156880000,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.708333333333333,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 20.458333333333332,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4749999999999999,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.483333333333334,
+      "ubuntu2204-213-107_server.FileSystems_Utilization_avg": 40.784244415596525,
+      "ubuntu2204-230-104_server.FileSystems_Utilization_avg": 14.404467622134375,
+      "ubuntu2204-213-133_server.FileSystems_Utilization_avg": 36.74985631018449,
+      "ubuntu2004_server.FileSystems_Utilization_avg": 72.64297283719327,
+      "ubuntu2204-213-107_server.Memory_Utilization_avg": 84.34083333333335,
+      "ubuntu2004_server.Memory_Utilization_avg": 35.08916666666668,
+      "ubuntu2204-213-133_server.Memory_Utilization_avg": 22.616666666666664,
+      "ubuntu2204-230-104_server.Memory_Utilization_avg": 6.359166666666667
+    },
+    {
+      "timestamp": 1760156760000,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.591666666666667,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.833333333333333,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 19.32083333333334,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4916666666666667,
+      "ubuntu2004_server.FileSystems_Utilization_avg": 72.64282167608653,
+      "ubuntu2204-230-104_server.FileSystems_Utilization_avg": 14.404440520472331,
+      "ubuntu2204-213-133_server.FileSystems_Utilization_avg": 36.749859602896024,
+      "ubuntu2204-213-107_server.FileSystems_Utilization_avg": 40.767216792009044,
+      "ubuntu2004_server.Memory_Utilization_avg": 35.09250000000001,
+      "ubuntu2204-213-133_server.Memory_Utilization_avg": 22.610833333333332,
+      "ubuntu2204-230-104_server.Memory_Utilization_avg": 6.355,
+      "ubuntu2204-213-107_server.Memory_Utilization_avg": 84.34041666666667
+    },
+    {
+      "timestamp": 1760156640000,
+      "ubuntu2204-213-107_server.Cpu_Utilization_avg": 25.87083333333333,
+      "ubuntu2204-213-133_server.Cpu_Utilization_avg": 2.545833333333333,
+      "ubuntu2004_server.Cpu_Utilization_avg": 0.4833333333333334,
+      "ubuntu2204-230-104_server.Cpu_Utilization_avg": 7.620833333333334,
+      "ubuntu2204-213-133_server.FileSystems_Utilization_avg": 36.749657101136606,
+      "ubuntu2004_server.FileSystems_Utilization_avg": 72.64268425689858,
+      "ubuntu2204-230-104_server.FileSystems_Utilization_avg": 14.40437735439387,
+      "ubuntu2204-213-107_server.FileSystems_Utilization_avg": 40.80700300203827,
+      "ubuntu2204-213-107_server.Memory_Utilization_avg": 84.2675,
+      "ubuntu2204-213-133_server.Memory_Utilization_avg": 22.635416666666668,
+      "ubuntu2204-230-104_server.Memory_Utilization_avg": 6.35375,
+      "ubuntu2004_server.Memory_Utilization_avg": 35.091666666666676
+    }
+  ],
+  "errorCode": null,
+  "errorMsgArgs": null,
+  "errorData": null
+}
+```
+
 ## 📄 라이선스
 
 MIT License

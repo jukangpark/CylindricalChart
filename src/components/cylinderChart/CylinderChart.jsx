@@ -23,8 +23,11 @@ const CylinderChart = ({ data, thresholdArray }) => {
         // 세로로 배치된 원의 개수 (10으로 나누어서 계산)
         const circleCount = Math.max(Math.floor(item.value / 10), 1);
 
-        // 위에서 아래로 흐르는 점 개수
-        const totalDots = Math.min(item.value, MAX_DOTS);
+        // 위에서 아래로 흐르는 점 개수 (안전한 계산)
+        const totalDots = Math.min(
+          Math.max(0, Math.floor(item.value || 0)),
+          MAX_DOTS
+        );
 
         return (
           <StyledCylinderChartItem key={index}>

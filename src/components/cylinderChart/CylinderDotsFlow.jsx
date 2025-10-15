@@ -7,18 +7,20 @@ import {
 import CylinderDot from "./CylinderDot.tsx";
 
 const CylinderDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
-  if (totalDots <= 0) return null;
+  // totalDots가 유효하지 않은 경우 처리
+  const validTotalDots = Math.max(0, Math.floor(Number(totalDots) || 0));
+  if (validTotalDots <= 0) return null;
 
   const isBottom = position === "bottom";
   const delayOffset = isBottom ? 0 : 0.4;
 
   return (
     <CylinderDotsContainer className={`${position}-dots`}>
-      {[...Array(totalDots)].map((_, i) => {
-        const { color, opacity } = getDotStyle(i, totalDots);
+      {[...Array(validTotalDots)].map((_, i) => {
+        const { color, opacity } = getDotStyle(i, validTotalDots);
         const delay = isBottom
           ? i * 0.1
-          : (totalDots - 1 - i) * 0.1 + delayOffset;
+          : (validTotalDots - 1 - i) * 0.1 + delayOffset;
 
         // 랜덤 marginLeft (음수~양수, -20px ~ +20px 범위)
         const randomMarginLeft = (Math.random() - 0.5) * 40;
