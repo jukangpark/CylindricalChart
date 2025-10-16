@@ -114,7 +114,10 @@ const ChartContainer = ({
     }
 
     const rotationTime = getRotationTimeInMs(settings.rotationTime);
-    if (rotationTime && chartType === "cylinder") {
+    if (
+      rotationTime &&
+      (chartType === "cylinder" || chartType === "equalizer")
+    ) {
       const interval = setInterval(() => {
         const paginationInfo = getPaginationInfo();
         const nextPage =
@@ -153,7 +156,7 @@ const ChartContainer = ({
       <Header>
         <Title>{title}</Title>
         <div style={{ display: "flex", alignItems: "center" }}>
-          {chartType === "cylinder" &&
+          {(chartType === "cylinder" || chartType === "equalizer") &&
             (() => {
               const paginationInfo = getPaginationInfo();
               return (
@@ -191,7 +194,10 @@ const ChartContainer = ({
       </Header>
       <Content>
         {React.cloneElement(children, {
-          data: chartType === "cylinder" ? getPaginatedData() : data,
+          data:
+            chartType === "cylinder" || chartType === "equalizer"
+              ? getPaginatedData()
+              : data,
         })}
       </Content>
 
