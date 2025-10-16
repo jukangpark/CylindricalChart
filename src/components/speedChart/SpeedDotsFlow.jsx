@@ -4,18 +4,21 @@ import { SpeedDotsContainer, StyledSpeedDot } from "./speedChartStyle.js";
 import SpeedDot from "./SpeedDot.tsx";
 
 const SpeedDotsFlow = ({ totalDots, position, thresholdArray = [] }) => {
-  if (totalDots <= 0) return null;
+  // totalDots 유효성 검사 및 제한
+  const safeTotalDots = Math.max(0, Math.min(Math.floor(totalDots) || 0, 50));
+
+  if (safeTotalDots <= 0) return null;
 
   const isRight = position === "right";
   const delayOffset = isRight ? 0 : 0.4;
 
   return (
     <SpeedDotsContainer className={`${position}-dots`}>
-      {[...Array(totalDots)].map((_, i) => {
-        const { color, opacity } = getDotStyle(i, totalDots);
+      {[...Array(safeTotalDots)].map((_, i) => {
+        const { color, opacity } = getDotStyle(i, safeTotalDots);
         const delay = isRight
           ? i * 0.1
-          : (totalDots - 1 - i) * 0.1 + delayOffset;
+          : (safeTotalDots - 1 - i) * 0.1 + delayOffset;
 
         // 랜덤 marginTop (음수~양수, -20px ~ +20px 범위)
         const randomMarginTop = (Math.random() - 0.5) * 40;

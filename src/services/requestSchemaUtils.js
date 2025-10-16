@@ -38,6 +38,10 @@ const createMetricDefinition = (
  * @returns {Object} 데이터 조건 객체
  */
 const createBaseDataCondition = (metricType, metricValueType = "avg") => {
+  // Fixed time range to avoid re-renders due to changing timestamps
+  const FIXED_START_TIME = 1704067200000; // 2024-01-01T00:00:00.000Z
+  const FIXED_END_TIME = 1704070800000; // 2024-01-01T01:00:00.000Z
+
   return {
     metricData: [
       {
@@ -54,8 +58,8 @@ const createBaseDataCondition = (metricType, metricValueType = "avg") => {
     ],
     metricCalculation: "NONE",
     mode: "NOW",
-    startTime: Date.now() - 3600000, // 1시간 전
-    endTime: Date.now(),
+    startTime: FIXED_START_TIME,
+    endTime: FIXED_END_TIME,
     interval: 0,
   };
 };

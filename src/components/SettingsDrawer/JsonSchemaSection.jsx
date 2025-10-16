@@ -1,6 +1,6 @@
 // JSON 스키마 섹션 컴포넌트
 
-import React from "react";
+import React, { useMemo } from "react";
 import Editor from "@monaco-editor/react";
 import {
   JsonSchemaContainer,
@@ -12,14 +12,19 @@ import {
  * JSON 스키마 섹션 컴포넌트
  */
 export const JsonSchemaSection = ({ jsonSchema }) => {
+  const jsonString = useMemo(
+    () => JSON.stringify(jsonSchema, null, 2),
+    [jsonSchema]
+  );
+
   return (
     <JsonSchemaContainer>
       <JsonSchemaTitle>생성된 JSON 스키마</JsonSchemaTitle>
       <MonacoContainer>
         <Editor
-          height="100%"
+          height="500px"
           defaultLanguage="json"
-          value={JSON.stringify(jsonSchema, null, 2)}
+          value={jsonString}
           theme="vs-dark"
           options={{
             readOnly: true,
@@ -28,7 +33,6 @@ export const JsonSchemaSection = ({ jsonSchema }) => {
             fontSize: 12,
             lineNumbers: "on",
             wordWrap: "off",
-            automaticLayout: true,
             padding: { top: 16, bottom: 16 },
             scrollbar: {
               vertical: "auto",
@@ -42,4 +46,3 @@ export const JsonSchemaSection = ({ jsonSchema }) => {
     </JsonSchemaContainer>
   );
 };
-

@@ -15,14 +15,17 @@ const SpeedChart = ({ data, thresholdArray }) => {
   return (
     <SpeedChartsContainer>
       {data.map((item, index) => {
+        // item.value 유효성 검사
+        const safeValue = Math.max(0, Math.min(Number(item.value) || 0, 1000));
+
         // 실린더 채워지는 너비 (10으로 나누어서 계산)
-        const fillWidth = item.value / 10;
+        const fillWidth = safeValue / 10;
 
         // 가로로 배치된 원의 개수 (10으로 나누어서 계산)
-        const circleCount = Math.max(Math.floor(item.value / 10), 1);
+        const circleCount = Math.max(Math.floor(safeValue / 10), 1);
 
         // 왼쪽에서 오른쪽으로 흐르는 점 개수
-        const totalDots = Math.min(item.value, MAX_DOTS);
+        const totalDots = Math.min(safeValue, MAX_DOTS);
 
         return (
           <SpeedChartItem key={index}>

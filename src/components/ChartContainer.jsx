@@ -43,6 +43,7 @@ const ChartContainer = ({
 
   const handleSettingsChange = (newSettings) => {
     setSettings(newSettings);
+    // 드로어에서 설정 변경 시 즉시 반영 (페이지네이션, 회전 등)
     if (onSettingsChange) {
       onSettingsChange(newSettings);
     }

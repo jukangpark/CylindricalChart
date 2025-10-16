@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   simulateApiRequest,
   transformRequestSchema,
@@ -40,7 +40,7 @@ const SettingsDrawer = ({
   const handleSettingChange = (key, value) => {
     const newSettings = { ...localSettings, [key]: value };
     setLocalSettings(newSettings);
-    onSettingsChange(newSettings);
+    // 부모 전파 제거 - select 변경 시 로컬만 업데이트
   };
 
   // API 호출 함수
@@ -56,7 +56,10 @@ const SettingsDrawer = ({
       const response = await simulateApiRequest(transformedSchema);
       setApiResponse(response);
 
-      // API 요청 성공 시 차트 데이터 업데이트
+      // API 요청 성공 시 부모로 settings 전파 및 차트 데이터 업데이트
+      if (onSettingsChange) {
+        onSettingsChange(localSettings);
+      }
       if (onApiRequest) {
         await onApiRequest(localSettings);
       }
@@ -107,7 +110,10 @@ const SettingsDrawer = ({
           )}
 
           <JsonSchemaSection
-            jsonSchema={generateJsonSchema(localSettings, chartType)}
+            jsonSchema={useMemo(
+              () => generateJsonSchema(localSettings, chartType),
+              [localSettings, chartType]
+            )}
           />
 
           <ApiResponseSection
