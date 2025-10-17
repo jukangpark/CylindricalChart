@@ -23,11 +23,7 @@ const CylinderCircles = ({
       const circleColor = getColorForCircleCallback(circleIndex);
 
       return (
-        <StyledCylinderCircle
-          key={circleIndex}
-          color={circleColor}
-          delay={circleIndex}
-        >
+        <StyledCylinderCircle key={circleIndex}>
           <CylinderCircle color={circleColor} />
         </StyledCylinderCircle>
       );
