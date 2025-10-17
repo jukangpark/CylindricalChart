@@ -25,7 +25,7 @@ const SpeedChart = ({ data, thresholdArray }) => {
         const circleCount = Math.max(Math.floor(safeValue / 10), 1);
 
         // 왼쪽에서 오른쪽으로 흐르는 점 개수
-        const totalDots = Math.min(safeValue, MAX_DOTS);
+        const totalDots = MAX_DOTS;
 
         return (
           <SpeedChartItem key={index}>

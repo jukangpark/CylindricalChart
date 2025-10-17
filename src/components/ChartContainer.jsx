@@ -110,39 +110,31 @@ const ChartContainer = ({
 
   // 자동 회전 로직
   useEffect(() => {
-    if (rotationInterval) {
-      clearInterval(rotationInterval);
-    }
-
     const rotationTime = getRotationTimeInMs(settings.rotationTime);
     if (
       rotationTime &&
       (chartType === "cylinder" || chartType === "equalizer")
     ) {
       const interval = setInterval(() => {
-        const paginationInfo = getPaginationInfo();
-        const nextPage =
-          paginationInfo.currentPage >= paginationInfo.totalPages
-            ? 1
-            : paginationInfo.currentPage + 1;
-        setCurrentPage(nextPage);
+        setCurrentPage((prevPage) => {
+          const paginationInfo = getPaginationInfo();
+          return prevPage >= paginationInfo.totalPages ? 1 : prevPage + 1;
+        });
       }, rotationTime);
 
       setRotationInterval(interval);
-    }
 
-    return () => {
+      return () => {
+        clearInterval(interval);
+      };
+    } else {
+      // 회전이 비활성화된 경우 기존 interval 정리
       if (rotationInterval) {
         clearInterval(rotationInterval);
+        setRotationInterval(null);
       }
-    };
-  }, [
-    settings.rotationTime,
-    currentPage,
-    chartType,
-    rotationInterval,
-    getPaginationInfo,
-  ]);
+    }
+  }, [settings.rotationTime, chartType, getPaginationInfo, rotationInterval]);
 
   // viewCount 변경 시 현재 페이지 조정
   useEffect(() => {

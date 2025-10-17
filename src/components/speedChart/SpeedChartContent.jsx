@@ -1,7 +1,7 @@
 import React from "react";
 import { SpeedCylinderFill, SpeedValueDisplay } from "./speedChartStyle.js";
 import SpeedEntranceCylinderCircle from "../entrance/SpeedEntranceCylinderCircle.tsx";
-import SpeedCircles from "./SpeedCircles.jsx";
+import SpeedCircles from "./SpeedCircles.tsx";
 import SpeedExitCylinderCircle from "../exit/SpeedExitCylinderCircle.tsx";
 
 const SpeedChartContent = ({

@@ -1,0 +1,22 @@
+// SpeedChart 관련 상수 정의
+
+export const UNIT_SIZE = 10;
+export const ANIMATION_DELAY = 0.1;
+export const ANIMATION_DURATION = 0.2;
+export const CIRCLE_ANIMATION_DURATION = 0.3;
+
+// 스타일 관련 상수
+export const STYLE_CONSTANTS = {
+  LABEL_FONT_SIZE: "12px",
+  LABEL_FONT_WEIGHT: "600",
+  LABEL_COLOR: "#333",
+  BORDER_COLOR: "#5C6061",
+  BORDER_WIDTH: "1px",
+  LABEL_MARGIN_TOP: "10px",
+  LABEL_PADDING_TOP: "5px",
+  LABEL_POSITION_TOP: "15px",
+  LABEL_TEXT_FONT_WEIGHT: "400",
+  LABEL_TEXT_COLOR: "#5C6061",
+  CIRCLE_MAX_HEIGHT: "73.6px",
+  CIRCLE_BACKGROUND_OPACITY: "50",
+} as const;

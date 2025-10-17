@@ -1,6 +1,6 @@
 import React from "react";
 import { CylinderFill, CylinderValueDisplay } from "./cylinderChartStyle.js";
-import CylinderCircles from "./CylinderCircles.jsx";
+import CylinderCircles from "./CylinderCircles.tsx";
 
 const CylinderContent = ({ item, fillHeight, circleCount, thresholdArray }) => {
   return (

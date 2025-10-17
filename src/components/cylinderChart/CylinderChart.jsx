@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   CylinderChartsContainer,
   StyledCylinderChartItem,
@@ -13,7 +13,7 @@ import CylinderExitCircle from "../exit/CylinderExitCircle.tsx";
 
 const MAX_DOTS = 50;
 
-const CylinderChart = ({ data, thresholdArray }) => {
+const CylinderChart = memo(({ data, thresholdArray }) => {
   return (
     <CylinderChartsContainer>
       {data.map((item, index) => {
@@ -21,13 +21,11 @@ const CylinderChart = ({ data, thresholdArray }) => {
         const fillHeight = item.value / 10;
 
         // 세로로 배치된 원의 개수 (10으로 나누어서 계산)
+        // 만약 10보다 아래의 값이면 1로 고정한다. 원이 한개로 처리됨.
         const circleCount = Math.max(Math.floor(item.value / 10), 1);
 
-        // 위에서 아래로 흐르는 점 개수 (안전한 계산)
-        const totalDots = Math.min(
-          Math.max(0, Math.floor(item.value || 0)),
-          MAX_DOTS
-        );
+        // 위에서 아래로 흐르는 점 개수 (항상 MAX_DOTS로 고정)
+        const totalDots = MAX_DOTS;
 
         return (
           <StyledCylinderChartItem key={index}>
@@ -59,6 +57,8 @@ const CylinderChart = ({ data, thresholdArray }) => {
       })}
     </CylinderChartsContainer>
   );
-};
+});
+
+CylinderChart.displayName = "CylinderChart";
 
 export default CylinderChart;

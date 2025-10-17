@@ -94,11 +94,6 @@ export const SpeedCylinderCircle = styled.div`
   transform: scaleX(0.8);
   position: relative;
   z-index: 2;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 export const SpeedLeftGradientCircle = styled.div`

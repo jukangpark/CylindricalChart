@@ -102,11 +102,6 @@ export const StyledCylinderCircle = styled.div`
   transform: scaleY(0.8);
   position: relative;
   z-index: 2;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 export const CylinderLeftGradientCircle = styled.div`
